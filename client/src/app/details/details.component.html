@@ -1,0 +1,14 @@
+<h2 align="center">Users details from database</h2>
+
+<div align="center">
+    <ul>
+        <li *ngFor="let details of detailsList">
+            <span>
+                NAME: {{details.firstname}}.
+                SURNAME: {{details.surname}}.
+                PHOTO: {{details.photo}}.
+                USERNAME: {{details.user.username}}.
+            </span>
+        </li>
+    </ul>
+</div>
