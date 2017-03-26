@@ -14,8 +14,10 @@ import {RegisterComponent} from "./register/register.component";
 import {NotFoundComponent} from "./notfound/not-found.component";
 import {DetailsComponent} from "./details/details.component";
 import {DetailsService} from "./details/details.service";
-import {GuardService} from "./authorization/guard.service";
+import {GuardService} from "./guard/guard.service";
 import {AllUsersComponent} from "./user/all/all-users.component";
+
+
 @NgModule({
     imports: [
         BrowserModule,

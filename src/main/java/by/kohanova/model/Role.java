@@ -20,10 +20,10 @@ public class Role implements Serializable, GrantedAuthority {
 
 //    @Column(name = "type")
 //    @Enumerated(EnumType.STRING)
-//    public RoleEnum role;
+//    public RoleEnum type;
 
     @Column(name = "type")
-    public String role;
+    public String type;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
 //    @JsonManagedReference
@@ -33,6 +33,6 @@ public class Role implements Serializable, GrantedAuthority {
     @Override
     @JsonIgnore
     public String getAuthority() {
-        return role;
+        return type;
     }
 }

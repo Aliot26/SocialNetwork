@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {CanActivate, Router, ActivatedRouteSnapshot} from "@angular/router";
 import {User} from "../model/user";
-import {LoginService} from "./login.service";
+import {LoginService} from "../authorization/login.service";
 import {Role} from "../model/role";
 
 @Injectable()
@@ -33,13 +33,13 @@ export class GuardService implements CanActivate {
         return false;
     }
 
-    public static isAdmin(): boolean {
-        const user: User = LoginService.getCurrentUser();
-        if (user != null)
-            for (let role of user.roles) {
-                if (role.type === "ROLE_ADMIN")
-                    return true;
-            }
-        return false;
-    }
+    // public static isAdmin(): boolean {
+    //     const user: User = LoginService.getCurrentUser();
+    //     if (user != null)
+    //         for (let role of user.roles) {
+    //             if (role.type === "ROLE_ADMIN")
+    //                 return true;
+    //         }
+    //     return false;
+    // }
 }

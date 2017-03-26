@@ -1,6 +1,7 @@
 package by.kohanova.controller;
 
 import by.kohanova.model.Details;
+import by.kohanova.model.Role;
 import by.kohanova.model.User;
 import by.kohanova.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,10 +35,6 @@ public class UserController {
     public ResponseEntity<?> createUser(@RequestBody User user) {
         try {
             System.out.println(user.username + " " + user.password + " " + user.id);
-            Details details = new Details();
-            details.firstname = "asd";
-            user.details = details;
-            userService.create(user);
             return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -12,9 +12,9 @@ public class Details implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", unique = true, nullable = false)
-    public User user;
+//    @OneToOne(optional = false, cascade = CascadeType.ALL, mappedBy="details")
+//    @JoinColumn(name = "user_id", unique = true, nullable = false)
+//    public User user;
 
     @Column
     public String firstname;
