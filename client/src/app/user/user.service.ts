@@ -8,7 +8,8 @@ import {Observable} from "rxjs";
 @Injectable()
 export class UserService {
 
-    constructor(private http: Http) { }
+    constructor(private http: Http) {
+    }
 
     getUsers(): Promise<User[]> {
         return this.http.get(environment.USER_URL)
@@ -24,9 +25,11 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    create(user: User) : Observable<Boolean> {
-        const body = JSON.stringify({username: user.username, password: user.password, firstname:user.firstname,
-            surname:user.surname});
+    create(user: User): Observable<Boolean> {
+        const body = JSON.stringify({
+            username: user.username, password: user.password, firstname: user.firstname,
+            surname: user.surname
+        });
         const headers = new Headers({
             'Content-Type': 'application/json'
         });

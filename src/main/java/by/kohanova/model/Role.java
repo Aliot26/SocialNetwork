@@ -23,7 +23,7 @@ public class Role implements Serializable, GrantedAuthority {
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     @JsonIgnore
-    public List<User> users = new ArrayList<>();
+    public List<User> user;
 
     @Override
     @JsonIgnore

@@ -35,11 +35,11 @@ public class UserController {
     public ResponseEntity<?> createUser(@RequestBody User user) {
         try {
             user.photo = "";
-            Role role = new Role();
-            role.id = 1;
-            user.roles.add(role);
+//            Role role = new Role();
+//            role.id = 1;
+//            user.roles.add(role);
 
-            System.out.println(user.username + " " + user.password + " " + user.roles.get(0).type);
+            System.out.println(user.username + " " + user.password);
             return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
