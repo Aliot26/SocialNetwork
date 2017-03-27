@@ -12,16 +12,15 @@ export class UserService {
     }
 
     getUsers(): Promise<User[]> {
-        return this.http.get(environment.USER_URL)
+        return this.http.get(environment.USERS_URL)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
-    getUserByUsername(inputText: string): Promise<User> {
-        return this.http.get(environment.USER_URL + inputText)
-            .toPromise()
-            .then(response => response.json())
+    getUserByUsername(username: string){
+        return this.http.get(environment.USER_URL + username)
+            .map(responce => responce.json())
             .catch(this.handleError);
     }
 

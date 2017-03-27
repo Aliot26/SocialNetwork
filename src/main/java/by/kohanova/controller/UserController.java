@@ -7,10 +7,7 @@ import by.kohanova.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,31 +43,24 @@ public class UserController {
         }
     }
 
-//    @RequestMapping(value = "/add", method = RequestMethod.POST)
-//    public void createUser(@RequestBody User user) {
-//        try {
-//            System.out.println(user.username+" "+user.password+" "+user.id);
-//            userService.create(user);
-//        } catch (NullPointerException e) {
-//            System.out.println("Error of users created");
-//        }
-//    }
-
     @RequestMapping("/all")
     public List<User> loadAllUsers() {
         try {
-
-//            User user = new User();
-//            user.username = "asd";
-//            user.password = "asd";
-//            user.firstname = "qwe";
-//            user.surname = "qwe";
-//            user.photo = "123";
-//            userService.create(user);
-
             return userService.findAll();
         } catch (NullPointerException e) {
             return null;
+        }
+    }
+
+    @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
+    public ResponseEntity<?> loadUserByUsername(@PathVariable String username) {
+        try {
+            User user = userService.findByUsername(username);
+            System.out.println(user.firstname);
+
+            return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
+        } catch (NullPointerException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

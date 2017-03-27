@@ -8,6 +8,7 @@ import {RegisterComponent} from "./register/register.component";
 import {NotFoundComponent} from "./notfound/not-found.component";
 import {DetailsComponent} from "./details/details.component";
 import {GuardService} from "./guard/guard.service";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
 
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path: 'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent},
     {path: 'details/all', component: DetailsComponent},
+    {path: 'profile', component: ProfileComponent},
     {path: 'user', component: UserComponent, canActivate: [GuardService], data: {roles: ['ROLE_ADMIN']},},
     {path: 'all-users', component: AllUsersComponent},
     {path: '', redirectTo: 'home', pathMatch: 'full'},
