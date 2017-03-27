@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
-import {User} from "../model/user";
 import {Router} from "@angular/router";
+import {User} from "../model/user";
 
 @Component({
     selector: 'login-component',
@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.loading = true;
-        this.loginService.login(new User(this.loginForm.value.username, this.loginForm.value.password))
+        this.loginService.login(new User({username:this.loginForm.value.username,
+            password:this.loginForm.value.password}))
             .subscribe(
                 result => {
                     if (result === true) {

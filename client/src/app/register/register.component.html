@@ -16,6 +16,20 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="firstname">Firstname</label>
+            <input id="firstname" type="firstname" class="form-control" name="firstname" formControlName="firstname" required/>
+            <div *ngIf="userForm.get('firstname').hasError('required') && userForm.get('firstname').touched" class="help-block">Firstname
+                is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname</label>
+            <input id="surname" type="surname" class="form-control" name="surname" formControlName="surname" required/>
+            <div *ngIf="userForm.get('surname').hasError('required') && userForm.get('surname').touched" class="help-block">Surname
+                is required
+            </div>
+        </div>
+        <div class="form-group">
             <button type="submit" [disabled]="userForm.invalid || loading" class="btn btn-primary">Registration
             </button>
             <button (click)="reset()" class="btn btn-primary">Reset</button>

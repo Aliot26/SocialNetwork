@@ -34,7 +34,12 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody User user) {
         try {
-            System.out.println(user.username + " " + user.password + " " + user.id);
+            user.photo = "";
+            Role role = new Role();
+            role.id = 1;
+            user.roles.add(role);
+
+            System.out.println(user.username + " " + user.password + " " + user.roles.get(0).type);
             return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,6 +59,15 @@ public class UserController {
     @RequestMapping("/all")
     public List<User> loadAllUsers() {
         try {
+
+//            User user = new User();
+//            user.username = "asd";
+//            user.password = "asd";
+//            user.firstname = "qwe";
+//            user.surname = "qwe";
+//            user.photo = "123";
+//            userService.create(user);
+
             return userService.findAll();
         } catch (NullPointerException e) {
             return null;

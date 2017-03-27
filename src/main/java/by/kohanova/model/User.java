@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,11 +31,11 @@ public class User implements Serializable {
     @Column
     public String photo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_role",
             joinColumns = {@JoinColumn(name = "users_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
-    public List<Role> roles;
+    public List<Role> roles = new ArrayList<>();
 }

@@ -25,7 +25,8 @@ export class UserService {
     }
 
     create(user: User) : Observable<Boolean> {
-        const body = JSON.stringify({username: user.username, password: user.password});
+        const body = JSON.stringify({username: user.username, password: user.password, firstname:user.firstname,
+            surname:user.surname});
         const headers = new Headers({
             'Content-Type': 'application/json'
         });

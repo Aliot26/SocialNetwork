@@ -21,13 +21,18 @@ export class RegisterComponent {
     ngOnInit(): void {
         this.userForm = new FormGroup({
             username: new FormControl('', Validators.required),
-            password: new FormControl('', Validators.required)
+            password: new FormControl('', Validators.required),
+            firstname: new FormControl('', Validators.required),
+            surname: new FormControl('', Validators.required)
         });
     }
 
     onSubmit() {
         this.loading = true;
-        this.userService.create(new User(this.userForm.value.username, this.userForm.value.password))
+        this.userService.create(new User({username:this.userForm.value.username,
+            password:this.userForm.value.password,
+            firstname:this.userForm.value.firstname,
+            surname:this.userForm.value.surname}))
             .subscribe(result => {
                 if (result === true) {
                     alert("Success!");

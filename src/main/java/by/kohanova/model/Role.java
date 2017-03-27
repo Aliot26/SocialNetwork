@@ -2,9 +2,9 @@ package by.kohanova.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,21 +14,16 @@ public class Role implements Serializable, GrantedAuthority {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Integer id;
-
-//    @Column(name = "type")
-//    @Enumerated(EnumType.STRING)
-//    public RoleEnum type;
 
     @Column(name = "type")
     public String type;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
-//    @JsonManagedReference
     @JsonIgnore
-    public List<User> users;
+    public List<User> users = new ArrayList<>();
 
     @Override
     @JsonIgnore

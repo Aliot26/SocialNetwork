@@ -31,6 +31,7 @@ public class AuthController {
         if (isNotEmpty(requestUser.username) && isNotEmpty(requestUser.password)) {
             User user = userService.findByUsername(requestUser.username);
             String token = tokenService.generate(user, requestUser.password);
+            System.out.println(token);
             if (token != null) {
                 user.password = "";
                 return new ResponseEntity<>(new Token(token, user), HttpStatus.OK);
