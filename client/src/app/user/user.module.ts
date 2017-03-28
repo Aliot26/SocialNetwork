@@ -3,11 +3,11 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {HttpModule} from "@angular/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-
 import {UserService} from "./user.service";
 import {UserComponent} from "./user.component";
 import {LoginService} from "../authorization/login.service";
 import {UserRoutingModule} from "./user-routing.module";
+import {UpdateProfileComponent} from "./update/update-profile.component";
 
 @NgModule({
     imports: [
@@ -16,10 +16,11 @@ import {UserRoutingModule} from "./user-routing.module";
         HttpModule,
         UserRoutingModule,
         ReactiveFormsModule,
-        RouterModule
+        RouterModule,
     ],
     declarations: [
-        UserComponent
+        UserComponent,
+        UpdateProfileComponent
     ],
     providers: [
         UserService,

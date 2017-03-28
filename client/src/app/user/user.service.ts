@@ -37,6 +37,20 @@ export class UserService {
             .map((response: Response) => response.status === 201);
     }
 
+    update(user: User) {
+        const body = JSON.stringify({id: user.id, username: user.username, password: user.password,
+            firstname: user.firstname, surname: user.surname, photo: user.photo
+        });
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        const options = new RequestOptions({headers: headers});
+        return this.http.put(environment.USER_UPDATE_URL, body, options)
+            .map((response: Response) => response.status === 200)
+            .catch(this.handleError);
+    }
+
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);

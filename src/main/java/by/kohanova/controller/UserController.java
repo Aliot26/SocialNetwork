@@ -52,6 +52,15 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
+        try {
+            return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
     public ResponseEntity<?> loadUserByUsername(@PathVariable String username) {
         try {

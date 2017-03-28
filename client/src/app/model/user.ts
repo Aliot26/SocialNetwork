@@ -1,6 +1,7 @@
 import {Role} from "./role";
 
 interface IUser {
+    id?: number;
     username?: string;
     password?: string;
     firstname?: string;
@@ -8,6 +9,7 @@ interface IUser {
     photo?: string;
 }
 export class User implements IUser {
+    id: number;
     username: string;
     password: string;
     firstname: string;
