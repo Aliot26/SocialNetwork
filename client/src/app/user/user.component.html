@@ -1,6 +1,37 @@
-<div align="center">
-    <nav>
-        <a routerLink="/all-users" routerLinkActive="active">All Users</a>
-        <a routerLink="/user-search" routerLinkActive="active">Search User</a>
-    </nav>
+<div class="row">
+    <div class="col-md-4" *ngIf="profileUser">
+        <h3>This is page about {{profileUser.username}}</h3>
+        <div>{{profileUser.photo}}</div>
+        <div>{{profileUser.username}}</div>
+        <div>
+            <ul>
+                <li><a routerLink="update-profile" routerLinkActive="active">About</a></li>
+                <li>News</li>
+                <li>Friends</li>
+            </ul>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Firstname</th>
+                <th>Surname</th>
+                <th>Photo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{profileUser.username}}</td>
+                <td>{{profileUser.firstname}}</td>
+                <td>{{profileUser.surname}}</td>
+                <td>{{profileUser.photo}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4 col-md-offset-4">
+        <router-outlet>
+
+        </router-outlet>
+    </div>
 </div>

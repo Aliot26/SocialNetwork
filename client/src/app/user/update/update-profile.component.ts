@@ -1,15 +1,13 @@
 import {Component, OnInit} from "@angular/core";
-import {User} from "../model/user";
-import {UserService} from "../user/user.service";
-// import {environment} from "../constants/environment";
-import {LoginService} from "../authorization/login.service";
-
+import {UserService} from "../user.service";
+import {User} from "../../model/user";
+import {LoginService} from "../../authorization/login.service";
 
 @Component({
-    selector: 'profile-component',
-    templateUrl: './profile.component.html'
+    selector: 'update-profile',
+    templateUrl: './update-profile.component.html'
 })
-export class ProfileComponent implements OnInit {
+export class UpdateProfileComponent implements OnInit {
     profileUser: User;
     currentUser: User;
 

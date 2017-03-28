@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
                 result => {
                     if (result === true) {
                         alert("Login success!");
-                        this.router.navigate(['/profile']);
+                        this.router.navigate(['/user']);
                     } else {
                         alert("Login Failed!");
                         this.error = 'Authentification error';
