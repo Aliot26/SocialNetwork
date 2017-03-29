@@ -31,11 +31,11 @@ public class User implements Serializable {
     @Column
     public String photo;
 
-    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_role",
             joinColumns = {@JoinColumn(name = "users_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
-    public List<Role> roles;
+    public List<Role> roles = new ArrayList<>();
 }

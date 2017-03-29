@@ -16,14 +16,15 @@ public class Role implements Serializable, GrantedAuthority {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public Integer id;
+//    public Integer id;
+    public int id;
 
     @Column(name = "type")
     public String type;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
-    @JsonIgnore
-    public List<User> user;
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+//    @JsonIgnore
+//    public List<User> user;
 
     @Override
     @JsonIgnore

@@ -11,14 +11,13 @@ export class UserService {
     constructor(private http: Http) {
     }
 
-    getUsers(): Promise<User[]> {
+    loadUsers(){
         return this.http.get(environment.USERS_URL)
-            .toPromise()
-            .then(response => response.json())
+            .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 
-    getUserByUsername(username: string){
+    getUserByUsername(username: string) {
         return this.http.get(environment.USER_URL + username)
             .map(responce => responce.json())
             .catch(this.handleError);
@@ -38,7 +37,8 @@ export class UserService {
     }
 
     update(user: User) {
-        const body = JSON.stringify({id: user.id, username: user.username, password: user.password,
+        const body = JSON.stringify({
+            id: user.id, username: user.username, password: user.password,
             firstname: user.firstname, surname: user.surname, photo: user.photo
         });
         const headers = new Headers({

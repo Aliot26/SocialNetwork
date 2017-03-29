@@ -3,6 +3,7 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
 import {Router} from "@angular/router";
 import {User} from "../model/user";
+import {Role} from "../model/role";
 
 @Component({
     selector: 'login-component',
@@ -10,8 +11,9 @@ import {User} from "../model/user";
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    loading: boolean = false;
     error: string = '';
+    role_admin: string = "ROLE_ADMIN";
+    roles: Role[];
 
     constructor(private loginService: LoginService, private router: Router) {
     }
@@ -25,18 +27,21 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        this.loading = true;
         this.loginService.login(new User({username:this.loginForm.value.username,
             password:this.loginForm.value.password}))
             .subscribe(
                 result => {
                     if (result === true) {
                         alert("Login success!");
-                        this.router.navigate(['/user']);
+                        this.roles = LoginService.getCurrentUser().roles;
+                        if (this.roles.find(role => role.type === this.role_admin)) {
+                            this.router.navigate(['/admin']);
+                        } else {
+                            this.router.navigate(['/user']);
+                        }
                     } else {
                         alert("Login Failed!");
                         this.error = 'Authentification error';
-                        this.loading = false;
                         this.router.navigate(['/login']);
                     }
                 }
