@@ -22,7 +22,6 @@ export class UpdateProfileComponent implements OnInit {
     ngOnInit(): void {
         this.loadData();
         this.createEmptyForm();
-        // this.fillForm();
     }
 
     private createEmptyForm(): void {

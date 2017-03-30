@@ -50,6 +50,16 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    remove(id: number): Observable<any> {
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        const options = new RequestOptions({headers: headers});
+        return this.http.delete(environment.USER_DELETE_URL + "/" + id, options)
+            .map((response) => response.status === 200)
+            .catch(this.handleError);
+    }
+
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);

@@ -7,6 +7,7 @@ export const environment = {
     DETAILS_URL: '/details/',
     USER_URL: '/users/username/',
     USER_UPDATE_URL: '/users/update',
+    USER_DELETE_URL: '/users/delete',
 
     USER_CONST: "CURRENT_USER"
 };

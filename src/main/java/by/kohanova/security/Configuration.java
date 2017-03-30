@@ -27,7 +27,7 @@ public class Configuration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST,"/users/").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.PUT,"/users/").hasAuthority("ROLE_ADMIN")
-                .antMatchers(HttpMethod.DELETE,"/users/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/users/").hasAuthority("ROLE_ADMIN")
                 .and()
                 .addFilterBefore(new AuthenticationTokenFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
