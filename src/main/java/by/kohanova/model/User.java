@@ -1,7 +1,5 @@
 package by.kohanova.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +28,9 @@ public class User implements Serializable {
 
     @Column
     public String photo;
+
+    @OneToMany(mappedBy = "author")
+    private List<News> news;
 
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
     @JoinTable(

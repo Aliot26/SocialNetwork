@@ -1,6 +1,5 @@
 package by.kohanova.controller;
 
-import by.kohanova.model.Details;
 import by.kohanova.model.Role;
 import by.kohanova.model.User;
 import by.kohanova.service.UserService;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

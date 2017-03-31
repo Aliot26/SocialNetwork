@@ -1,0 +1,25 @@
+<h1>NEWS</h1>
+<div>
+    <table class="table table-bordered table-hover"  *ngIf="newsList">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date</th>
+            <th>Content</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let news of newsList">
+            <td>{{news.title}}</td>
+            <td>{{news.author}}</td>
+            <td>{{news.date}}</td>
+            <td>{{news.content}}</td>
+            <td>
+                <button class="btn btn-info" >Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
