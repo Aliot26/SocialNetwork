@@ -29,7 +29,7 @@ public class User implements Serializable {
     @Column
     public String photo;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "user")
     private List<News> news;
 
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)

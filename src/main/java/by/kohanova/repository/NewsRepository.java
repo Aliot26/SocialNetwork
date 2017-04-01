@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface NewsRepository extends JpaRepository<News, Integer> {
-    @Query("select n from News n where n.author = :id")
+    @Query("select n from News n where n.user.id = :id")
     List<News> findById(@Param("id") Integer id);
 }

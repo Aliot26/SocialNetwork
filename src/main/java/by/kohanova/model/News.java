@@ -16,12 +16,12 @@ public class News implements Serializable {
     @Column
     public String title;
 
-//    @ManyToOne
-//    @JoinColumn(name = "author")
-//    public User user;
+    @ManyToOne
+    @JoinColumn(name = "author")
+    public User user;
 
-    @Column
-    public Integer author;
+//    @Column
+//    public Integer author;
 
     @Column
     public String content;
