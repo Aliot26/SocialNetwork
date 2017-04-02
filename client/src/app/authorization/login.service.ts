@@ -14,7 +14,10 @@ export class LoginService {
 
     login(user: User): Observable<Boolean> {
         const body = JSON.stringify({username: user.username, password: user.password});
-        const options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        const options = new RequestOptions({headers: headers});
         return this.http.post(environment.LOGIN_URL, body, options)
             .map((response: Response) => {
                 const token = response.json().token;
@@ -35,7 +38,7 @@ export class LoginService {
         localStorage.removeItem(environment.USER_CONST);
     }
 
-    private static handleError(error: Response | any) {
+    static handleError(error: Response | any) {
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';

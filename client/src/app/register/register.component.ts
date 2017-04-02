@@ -11,7 +11,6 @@ import {User} from "../model/user";
 
 export class RegisterComponent {
     userForm: FormGroup;
-    loading: boolean = false;
     error: string = '';
 
     constructor(private userService: UserService, private router: Router) {
@@ -28,7 +27,6 @@ export class RegisterComponent {
     }
 
     onSubmit() {
-        this.loading = true;
         this.userService.create(new User({username:this.userForm.value.username,
             password:this.userForm.value.password,
             firstname:this.userForm.value.firstname,
@@ -36,10 +34,9 @@ export class RegisterComponent {
             .subscribe(result => {
                 if (result === true) {
                     alert("Success!");
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/user']);
                 } else {
-                    alert("FOOOO!");
-                    this.loading = false;
+                    alert("This username already exists!");
                 }
             });
     }

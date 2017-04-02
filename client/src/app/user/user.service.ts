@@ -4,9 +4,12 @@ import 'rxjs/add/operator/toPromise';
 import {User} from "../model/user";
 import {environment} from "../constants/environment";
 import {Observable} from "rxjs";
+import {LoginService} from "../authorization/login.service";
 
 @Injectable()
 export class UserService {
+
+    public currentUser: User;
 
     constructor(private http: Http) {
     }
@@ -23,7 +26,7 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    create(user: User): Observable<Boolean> {
+    create(user: User): Observable<any> {
         const body = JSON.stringify({
             username: user.username, password: user.password, firstname: user.firstname,
             surname: user.surname
@@ -33,7 +36,19 @@ export class UserService {
         });
         const options = new RequestOptions({headers: headers});
         return this.http.post(environment.AUTH_USER_URL, body, options)
-            .map((response: Response) => response.status === 201);
+            .map((response: Response) => {
+        const token = response.json().token;
+        const user = response.json().user;
+        if (token && user) {
+            this.currentUser = user;
+            this.currentUser.token = token;
+            localStorage.setItem(environment.USER_CONST, JSON.stringify(this.currentUser));
+            return true;
+        }
+        return false;
+    })
+            .catch(LoginService.handleError);
+           // response.status === 201);
     }
 
     update(user: User) {

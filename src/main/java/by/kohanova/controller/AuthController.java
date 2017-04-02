@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
+/**
+ * Controller for authentication realization
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -26,12 +29,17 @@ public class AuthController {
         this.userService = userService;
     }
 
+    /**
+     * Find {@link User} by username and password in database and generate token by {@link TokenService}
+     *
+     * @param requestUser
+     * @return {@link Token} and http response with http status code
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> authenticate(@RequestBody User requestUser) {
         if (isNotEmpty(requestUser.username) && isNotEmpty(requestUser.password)) {
             User user = userService.findByUsername(requestUser.username);
             String token = tokenService.generate(user, requestUser.password);
-            System.out.println(token);
             if (token != null) {
                 user.password = "";
                 return new ResponseEntity<>(new Token(token, user), HttpStatus.OK);

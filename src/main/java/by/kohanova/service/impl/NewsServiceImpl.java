@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation of {@link NewsService} service
+ */
 @Service
 public class NewsServiceImpl implements NewsService {
 

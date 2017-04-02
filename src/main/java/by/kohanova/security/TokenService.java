@@ -25,11 +25,9 @@ public class TokenService {
                 tokenData.put("username", user.username);
                 tokenData.put("password", user.password);
                 tokenData.put("token_create_date", LocalDateTime.now());
-
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.MINUTE, 60);
                 tokenData.put("token_expiration_date", calendar.getTime());
-
                 JwtBuilder jwtBuilder = Jwts.builder();
                 jwtBuilder.setExpiration(calendar.getTime());
                 jwtBuilder.setClaims(tokenData);
