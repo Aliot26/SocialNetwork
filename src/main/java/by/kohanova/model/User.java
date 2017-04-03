@@ -32,6 +32,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<News> news;
 
+    @OneToMany(mappedBy = "user1")
+    private List<Friends> friends;
+
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_role",

@@ -1,5 +1,6 @@
 package by.kohanova.controller;
 
+import by.kohanova.model.Friends;
 import by.kohanova.model.Role;
 import by.kohanova.model.Token;
 import by.kohanova.model.User;
