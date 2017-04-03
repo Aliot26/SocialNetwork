@@ -3,6 +3,7 @@ import {NgModule} from "@angular/core";
 import {UserComponent} from "./user.component";
 import {UpdateProfileComponent} from "./update/update-profile.component";
 import {NewsComponent} from "../news/news.component";
+import {AddNewsComponent} from "../news/add/add-news.component";
 const routes: Routes = [
     {
         path: 'user', component: UserComponent,
@@ -13,7 +14,13 @@ const routes: Routes = [
             },
             {
                 path: 'news',
-                component: NewsComponent
+                component: NewsComponent,
+                children: [
+                    {
+                        path: 'add-news',
+                        component: AddNewsComponent
+                    }
+                ]
             }
         ]
     },

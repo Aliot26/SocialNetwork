@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../constants/environment";
-import {Http} from "@angular/http";
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
+import {News} from "../model/news";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class NewsService {
@@ -10,12 +12,27 @@ export class NewsService {
 
     getNewsByAuthor(id: number) {
         return this.http.get(environment.NEWS_URL + "/" + id)
-            .map(responce => responce.json())
+            .map(response => response.json())
             .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);
+    }
+
+    create(news: News): Observable<any> {
+        const body = JSON.stringify({
+            title: news.title, content: news.content
+        });
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        const options = new RequestOptions({headers: headers});
+        console.log(body);
+        return this.http.post(environment.NEWS_ADD_URL, body, options)
+            .map((response: Response) => response.status === 201)
+            .catch(this.handleError);
+        // response.status === 201);
     }
 }

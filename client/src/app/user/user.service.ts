@@ -22,7 +22,7 @@ export class UserService {
 
     getUserByUsername(username: string) {
         return this.http.get(environment.USER_URL + username)
-            .map(responce => responce.json())
+            .map(response => response.json())
             .catch(this.handleError);
     }
 

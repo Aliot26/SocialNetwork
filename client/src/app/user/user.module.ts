@@ -8,6 +8,10 @@ import {UserComponent} from "./user.component";
 import {LoginService} from "../authorization/login.service";
 import {UserRoutingModule} from "./user-routing.module";
 import {UpdateProfileComponent} from "./update/update-profile.component";
+import {NewsService} from "../news/news.service";
+import {AddNewsComponent} from "../news/add/add-news.component";
+import {NewsComponent} from "../news/news.component";
+
 
 @NgModule({
     imports: [
@@ -16,15 +20,18 @@ import {UpdateProfileComponent} from "./update/update-profile.component";
         HttpModule,
         UserRoutingModule,
         ReactiveFormsModule,
-        RouterModule,
+        RouterModule
     ],
     declarations: [
         UserComponent,
+        NewsComponent,
+        AddNewsComponent,
         UpdateProfileComponent
     ],
     providers: [
         UserService,
-        LoginService
+        LoginService,
+        NewsService,
     ]
 })
 export class UserModule {

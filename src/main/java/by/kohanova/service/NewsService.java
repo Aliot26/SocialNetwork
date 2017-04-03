@@ -33,5 +33,12 @@ public interface NewsService {
      * @return list {@link News}
      */
     List<News> findById(Integer id);
+
+    /**
+     * Create and save {@link News} in database
+     *
+     * @param news
+     */
+    News create(News news);
 }
 

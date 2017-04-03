@@ -52,6 +52,21 @@ public class NewsController {
         }
     }
 
+    /**
+     * Create {@link News} in datebase from news form
+     *
+     * @param news model
+     * @return http response with http status code
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseEntity<?> createNews(@RequestBody News news) {
+        try {
+            return new ResponseEntity<>(newsService.create(news), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public void updateDetails(@RequestBody News news) {
         try {

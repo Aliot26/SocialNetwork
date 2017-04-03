@@ -15,7 +15,6 @@ import {DetailsService} from "./details/details.service";
 import {GuardService} from "./guard/guard.service";
 import {UserModule} from "./user/user.module";
 import {AdminComponent} from "./admin/admin.component";
-import {NewsModule} from "./news/news.module";
 
 @NgModule({
     imports: [
@@ -23,7 +22,6 @@ import {NewsModule} from "./news/news.module";
         FormsModule,
         HttpModule,
         UserModule,
-        NewsModule,
         AppRoutingModule,
         ReactiveFormsModule,
         RouterModule

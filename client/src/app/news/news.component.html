@@ -1,25 +1,19 @@
 <h1>NEWS</h1>
+<router-outlet>
+
+</router-outlet>
 <div>
-    <table class="table table-bordered table-hover"  *ngIf="newsList">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Date</th>
-            <th>Content</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let news of newsList">
-            <td>{{news.title}}</td>
-            <td>{{news.user.firstname}}</td>
-            <td>{{news.date}}</td>
-            <td>{{news.content}}</td>
-            <td>
-                <button class="btn btn-info" >Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <button class="btn btn-info" routerLink="add-news" routerLinkActive="active">Add news</button>
+</div>
+<div>
+    <div class="panel-group" *ngIf="newsList">
+        <div class="panel panel-default" *ngFor="let news of newsList">
+            <div class="panel-heading">{{news.title}}</div>
+            <div class="panel-heading">{{news.date}}</div>
+            <div class="panel-heading">{{news.user.firstname}}</div>
+            <div class="panel-body">{{news.content}}</div>
+            <button class="btn btn-info" >Edit</button>
+            <button class="btn btn-danger">Delete</button>
+        </div>
+    </div>
 </div>

@@ -7,6 +7,7 @@ export const environment = {
     USER_UPDATE_URL: '/users/update',
     USER_DELETE_URL: '/users/delete',
     NEWS_URL: '/news/all',
+    NEWS_ADD_URL: '/news/add',
 
     USER_CONST: "CURRENT_USER"
 };
