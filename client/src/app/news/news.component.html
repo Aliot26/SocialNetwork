@@ -13,7 +13,7 @@
             <div class="panel-heading">{{news.user.firstname}}</div>
             <div class="panel-body">{{news.content}}</div>
             <button class="btn btn-info" >Edit</button>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" (click)="onDelete(news.id)">Delete</button>
         </div>
     </div>
 </div>

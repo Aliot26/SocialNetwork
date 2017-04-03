@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,6 +62,7 @@ public class NewsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> createNews(@RequestBody News news) {
         try {
+            news.date = new Date();
             return new ResponseEntity<>(newsService.create(news), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

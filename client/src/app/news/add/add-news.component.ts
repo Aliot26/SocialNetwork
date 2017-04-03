@@ -3,6 +3,8 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {NewsService} from "../news.service";
 import {News} from "../../model/news";
 import {Router} from "@angular/router";
+import {User} from "../../model/user";
+import {LoginService} from "../../authorization/login.service";
 
 @Component({
     selector: 'add-news',
@@ -10,6 +12,7 @@ import {Router} from "@angular/router";
 })
 export class AddNewsComponent{
     newsForm: FormGroup;
+    currentUser: User;
 
     constructor(private newsService: NewsService, private router: Router){}
 
@@ -25,8 +28,9 @@ export class AddNewsComponent{
     }
 
     onSubmit() {
+        this.currentUser = LoginService.getCurrentUser();
         this.newsService.create(new News({title:this.newsForm.value.title,
-            content:this.newsForm.value.content}))
+            content:this.newsForm.value.content, author:this.currentUser}))
             .subscribe(result => {
                 if (result === true) {
                     alert("Success!");
@@ -36,6 +40,4 @@ export class AddNewsComponent{
                 }
             });
     }
-
-
 }

@@ -23,7 +23,7 @@ export class NewsService {
 
     create(news: News): Observable<any> {
         const body = JSON.stringify({
-            title: news.title, content: news.content
+            title: news.title, content: news.content, user: news.author
         });
         const headers = new Headers({
             'Content-Type': 'application/json'
