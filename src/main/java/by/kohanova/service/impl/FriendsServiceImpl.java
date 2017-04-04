@@ -26,4 +26,9 @@ public class FriendsServiceImpl implements FriendsService {
     public Friends create(Friends friends) {
         return friendsRepository.save(friends);
     }
+
+    @Override
+    public List<Friends> findById(Integer id) {
+        return friendsRepository.findById(id);
+    }
 }

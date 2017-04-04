@@ -8,6 +8,7 @@ export const environment = {
     USER_DELETE_URL: '/users/delete',
     NEWS_URL: '/news/all',
     NEWS_ADD_URL: '/news/add',
+    FRIENDS_URL: '/friends/all',
 
     USER_CONST: "CURRENT_USER"
 };

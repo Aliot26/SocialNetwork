@@ -29,7 +29,6 @@ export class NewsService {
             'Content-Type': 'application/json'
         });
         const options = new RequestOptions({headers: headers});
-        console.log(body);
         return this.http.post(environment.NEWS_ADD_URL, body, options)
             .map((response: Response) => response.status === 201)
             .catch(this.handleError);

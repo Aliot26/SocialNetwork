@@ -1,0 +1,26 @@
+<h4>List of friends</h4>
+<div>
+    <table class="table table-bordered table-hover"  *ngIf="friendsList">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Firstname</th>
+            <th>Surname</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let friends of friendsList">
+            <td>{{friends.user2.username}}</td>
+            <td>{{friends.user2.firstname}}</td>
+            <td>{{friends.user2.surname}}</td>
+            <td>{{friends.status}}</td>
+            <td>
+                <button class="btn btn-info">Change status</button>
+                <button class="btn btn-danger" >Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

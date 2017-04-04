@@ -11,6 +11,8 @@ import {UpdateProfileComponent} from "./update/update-profile.component";
 import {NewsService} from "../news/news.service";
 import {AddNewsComponent} from "../news/add/add-news.component";
 import {NewsComponent} from "../news/news.component";
+import {FriendsComponent} from "../friends/friends.component";
+import {FriendsService} from "../friends/friends.service";
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import {NewsComponent} from "../news/news.component";
     declarations: [
         UserComponent,
         NewsComponent,
+        FriendsComponent,
         AddNewsComponent,
         UpdateProfileComponent
     ],
@@ -32,6 +35,7 @@ import {NewsComponent} from "../news/news.component";
         UserService,
         LoginService,
         NewsService,
+        FriendsService
     ]
 })
 export class UserModule {

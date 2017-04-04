@@ -4,6 +4,7 @@ import {UserComponent} from "./user.component";
 import {UpdateProfileComponent} from "./update/update-profile.component";
 import {NewsComponent} from "../news/news.component";
 import {AddNewsComponent} from "../news/add/add-news.component";
+import {FriendsComponent} from "../friends/friends.component";
 const routes: Routes = [
     {
         path: 'user', component: UserComponent,
@@ -11,6 +12,10 @@ const routes: Routes = [
             {
                 path: 'update-profile',
                 component: UpdateProfileComponent
+            },
+            {
+                path: 'friends',
+                component: FriendsComponent
             },
             {
                 path: 'news',
