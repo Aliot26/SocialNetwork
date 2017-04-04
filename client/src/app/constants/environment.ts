@@ -1,6 +1,7 @@
 export const environment = {
     LOGIN_URL: '/auth/login',
     USERS_URL: '/users/all',
+    FILTERED_USERS_URL: '/users/friends',
     AUTH_USER_URL: '/users/add',
     DETAILS_URL: '/details/',
     USER_URL: '/users/username/',

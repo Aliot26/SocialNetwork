@@ -5,12 +5,14 @@ import by.kohanova.model.Role;
 import by.kohanova.model.Token;
 import by.kohanova.model.User;
 import by.kohanova.security.TokenService;
+import by.kohanova.service.FriendsService;
 import by.kohanova.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -21,11 +23,14 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final TokenService tokenService;
+    private final FriendsService friendsService;
 
     @Autowired
-    public UserController(UserService userService, TokenService tokenService) {
+    public UserController(UserService userService, FriendsService friendsService,
+                          TokenService tokenService) {
         this.tokenService = tokenService;
         this.userService = userService;
+        this.friendsService = friendsService;
     }
 
     @RequestMapping("/hello")
@@ -60,6 +65,34 @@ public class UserController {
     public List<User> loadAllUsers() {
         try {
             return userService.findAll();
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Return list of users excluding admin, current user and friends
+     *
+     * @return list of users
+     */
+    @RequestMapping(value = "/friends/{id}", method = RequestMethod.GET)
+    public List<User> loadAllFriends(@PathVariable Integer id) {
+        try {
+            List<Friends> friendsList = friendsService.findById(id);
+            List<User> allUsers = userService.findAll();
+
+            for (Iterator<User> iter = allUsers.listIterator(); iter.hasNext(); ) {
+                User user = iter.next();
+                if (user.id == id || user.roles.get(0).id != 2) {
+                    iter.remove();
+                }
+                for (Friends friends : friendsList) {
+                    if (user.id == friends.user2.id) {
+                        iter.remove();
+                    }
+                }
+            }
+            return allUsers;
         } catch (NullPointerException e) {
             return null;
         }

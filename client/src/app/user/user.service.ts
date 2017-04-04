@@ -20,6 +20,12 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    loadFilteredUsers(id: number) {
+        return this.http.get(environment.FILTERED_USERS_URL + "/" + id)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
     getUserByUsername(username: string) {
         return this.http.get(environment.USER_URL + username)
             .map(response => response.json())

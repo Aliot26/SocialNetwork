@@ -13,6 +13,7 @@ import {AddNewsComponent} from "../news/add/add-news.component";
 import {NewsComponent} from "../news/news.component";
 import {FriendsComponent} from "../friends/friends.component";
 import {FriendsService} from "../friends/friends.service";
+import {SearchFriendsComponent} from "../friends/search/search-friends.component";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {FriendsService} from "../friends/friends.service";
         UserComponent,
         NewsComponent,
         FriendsComponent,
+        SearchFriendsComponent,
         AddNewsComponent,
         UpdateProfileComponent
     ],

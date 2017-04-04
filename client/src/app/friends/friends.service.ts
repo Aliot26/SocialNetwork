@@ -19,7 +19,7 @@ export class FriendsService {
         return Promise.reject(error.message || error);
     }
 
-    // create(news: News): Observable<any> {
+    // create(friends: Friends): Observable<any> {
     //     const body = JSON.stringify({
     //         title: news.title, content: news.content, user: news.author
     //     });
