@@ -1,4 +1,8 @@
 .content{
-    background-color: #eeeeee;
-    width: 600px;
+    width: 60%;
+    float: right;
+}
+
+.user-menu{
+    padding-left: 0;
 }

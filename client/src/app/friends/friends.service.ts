@@ -31,8 +31,7 @@ export class FriendsService {
         const options = new RequestOptions({headers: headers});
         console.log(body);
         return this.http.post(environment.FRIENDS_ADD_URL, body, options)
-            .map((response: Response) => response.status === 200)
+            .map((response: Response) => response.status === 201)
             .catch(this.handleError);
-        // response.status === 201);
     }
 }
