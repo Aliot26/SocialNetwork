@@ -15,6 +15,7 @@ import {DetailsService} from "./details/details.service";
 import {GuardService} from "./guard/guard.service";
 import {UserModule} from "./user/user.module";
 import {AdminComponent} from "./admin/admin.component";
+import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import {AdminComponent} from "./admin/admin.component";
         NotFoundComponent
     ],
     providers: [
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
         LoginService,
         GuardService,
         DetailsService

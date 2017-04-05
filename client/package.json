@@ -5,7 +5,12 @@
   "scripts": {
     "build": "webpack --progress -p",
     "server": "webpack-dev-server --inline --progress",
-    "start": "npm run server"
+    "start": "npm run server",
+    "e2e": "server:prod:ci protractor",
+    "webdriver-manager": "webdriver-manager",
+    "webdriver:update": "webdriver-manager update",
+    "webdriver:start": "npm run webdriver-manager start",
+    "protractor": "protractor"
   },
   "dependencies": {
     "@angular/common": "2.4.7",
@@ -23,18 +28,21 @@
   },
   "devDependencies": {
     "@types/node": "^6.0.38",
-    "@types/jasmine": "2.5.41",
-    "@types/selenium-webdriver": "2.53.39",
-    "@types/lodash": "4.14.50",
+    "@types/jasmine": "^2.5.41",
+    "@types/selenium-webdriver": "^2.53.42",
+    "@types/lodash": "^4.14.50",
     "angular2-template-loader": "^0.6.0",
     "awesome-typescript-loader": "^3.0.0-beta.17",
     "html-webpack-plugin": "^2.8.1",
     "raw-loader": "0.5.1",
-    "rimraf": "^2.5.1",
+
     "typedoc": "^0.5.1",
     "typescript": "2.0.10",
     "url-loader": "^0.5.6",
     "webpack": "2.2.1",
-    "webpack-dev-server": "2.3.0"
+    "webpack-dev-server": "2.3.0",
+    "jasmine-core": "^2.5.2",
+    "jasmine-spec-reporter": "^3.2.0",
+    "protractor": "^5.1.1"
   }
 }

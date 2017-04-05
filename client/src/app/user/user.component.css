@@ -1,8 +1,13 @@
 .content{
     width: 60%;
-    float: right;
+    float: left;
 }
 
 .user-menu{
     padding-left: 0;
+}
+
+.navcont{
+    width: 38%;
+    float: left;
 }
