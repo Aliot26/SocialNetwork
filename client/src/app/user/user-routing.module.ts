@@ -6,6 +6,7 @@ import {NewsComponent} from "../news/news.component";
 import {AddNewsComponent} from "../news/add/add-news.component";
 import {FriendsComponent} from "../friends/friends.component";
 import {SearchFriendsComponent} from "../friends/search/search-friends.component";
+import {RequestComponent} from "../friends/request/request.component";
 const routes: Routes = [
     {
         path: 'user', component: UserComponent,
@@ -21,6 +22,10 @@ const routes: Routes = [
             {
                 path: 'search',
                 component: SearchFriendsComponent
+            },
+            {
+                path: 'request',
+                component: RequestComponent
             },
             {
                 path: 'news',

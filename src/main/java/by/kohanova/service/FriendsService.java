@@ -28,4 +28,6 @@ public interface FriendsService {
      * @return list {@link Friends}
      */
     List<Friends> findById(Integer id);
+
+    List<Friends> findByFriendId(Integer id);
 }

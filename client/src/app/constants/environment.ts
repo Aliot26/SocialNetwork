@@ -11,6 +11,7 @@ export const environment = {
     NEWS_ADD_URL: '/news/add',
     FRIENDS_URL: '/friends/all',
     FRIENDS_ADD_URL: '/friends/add',
+    FRIENDS_REQUESTED_URL: '/friends/requested',
 
     USER_CONST: "CURRENT_USER"
 };

@@ -29,6 +29,11 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     public List<Friends> findById(Integer id) {
-        return friendsRepository.findById(id);
+        return friendsRepository.findByCurrentUserId(id);
+    }
+
+    @Override
+    public List<Friends> findByFriendId(Integer id) {
+        return friendsRepository.findByFriendId(id);
     }
 }

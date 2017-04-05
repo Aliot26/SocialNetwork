@@ -44,6 +44,15 @@ public class FriendsController {
         }
     }
 
+    @RequestMapping(value = "/requested/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> loadRequestedFriendsById(@PathVariable("id") Integer id) {
+        try {
+            return new ResponseEntity<>(friendsService.findByFriendId(id), HttpStatus.OK);
+        } catch (NullPointerException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     /**
      * Return list of all friends from database
      *
