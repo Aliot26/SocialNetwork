@@ -10,6 +10,7 @@ export const environment = {
     NEWS_URL: '/news/all',
     NEWS_ADD_URL: '/news/add',
     FRIENDS_URL: '/friends/all',
+    FRIENDS_ADD_URL: '/friends/add',
 
     USER_CONST: "CURRENT_USER"
 };

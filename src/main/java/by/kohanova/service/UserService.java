@@ -44,4 +44,6 @@ public interface UserService {
      * @param id
      */
     void delete(Integer id);
+
+    User findById(Integer id);
 }

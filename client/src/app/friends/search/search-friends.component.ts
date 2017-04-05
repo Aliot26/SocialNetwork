@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {User} from "../../model/user";
 import {UserService} from "../../user/user.service";
 import {LoginService} from "../../authorization/login.service";
+import {FriendsService} from "../friends.service";
 
 @Component({
     selector: 'search-friends',
@@ -11,7 +12,8 @@ export class SearchFriendsComponent  implements OnInit  {
     userList: User[];
     public currentUser: User;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,
+                private friendsService: FriendsService) {
     }
 
     ngOnInit(): void {
@@ -22,5 +24,17 @@ export class SearchFriendsComponent  implements OnInit  {
         this.currentUser = LoginService.getCurrentUser();
         this.userService.loadFilteredUsers(this.currentUser.id)
             .subscribe(userList => this.userList = userList);
+    }
+
+    onSubmit(id: number){
+        this.currentUser = LoginService.getCurrentUser();
+        this.friendsService.create(this.currentUser.id, id)
+            .subscribe(result => {
+                if (result === true) {
+                    alert("Success!");
+                } else {
+                    alert("It is impossible to create the news");
+                }
+            });
     }
 }

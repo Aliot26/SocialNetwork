@@ -36,7 +36,7 @@ export class AddNewsComponent{
                     alert("Success!");
                     this.router.navigate(['/user/news']);
                 } else {
-                    alert("This username already exists!");
+                    alert("It is impossible to create the news");
                 }
             });
     }

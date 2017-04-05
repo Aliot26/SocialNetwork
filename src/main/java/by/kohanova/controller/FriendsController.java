@@ -1,6 +1,7 @@
 package by.kohanova.controller;
 
 import by.kohanova.model.Friends;
+import by.kohanova.model.FriendsIds;
 import by.kohanova.model.Token;
 import by.kohanova.model.User;
 import by.kohanova.service.FriendsService;
@@ -25,17 +26,32 @@ public class FriendsController {
         this.userService = userService;
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseEntity<?> createUser(@RequestBody FriendsIds friendsIds) {
+        try {
+            Integer currentId = friendsIds.current_id;
+            Integer friendId = friendsIds.friend_id;
 
+            System.out.println(currentId);
+            System.out.println(friendId);
 
-//    @RequestMapping(value = "/add", method = RequestMethod.POST)
-//    public ResponseEntity<?> createUser(@RequestBody Friends friends) {
-//        try {
-//
-//            return new ResponseEntity<>(new Friends(), HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//    }
+            User currentUser = userService.findById(currentId);
+            User friendUser = userService.findById(friendId);
+
+            System.out.println(currentUser);
+            System.out.println(friendUser);
+
+            Friends friends = new Friends();
+            friends.user1 = currentUser;
+            friends.user2 = friendUser;
+            friends.status = false;
+            friendsService.create(friends);
+
+            return new ResponseEntity<>(new Friends(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     /**
      * Return list of all friends from database

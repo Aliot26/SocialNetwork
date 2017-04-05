@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {environment} from "../constants/environment";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class FriendsService {
@@ -19,18 +20,19 @@ export class FriendsService {
         return Promise.reject(error.message || error);
     }
 
-    // create(friends: Friends): Observable<any> {
-    //     const body = JSON.stringify({
-    //         title: news.title, content: news.content, user: news.author
-    //     });
-    //     const headers = new Headers({
-    //         'Content-Type': 'application/json'
-    //     });
-    //     const options = new RequestOptions({headers: headers});
-    //     console.log(body);
-    //     return this.http.post(environment.NEWS_ADD_URL, body, options)
-    //         .map((response: Response) => response.status === 201)
-    //         .catch(this.handleError);
-    //     // response.status === 201);
-    // }
+    create(current_id: number, friend_id: number): Observable<any> {
+        const body = JSON.stringify({
+            current_id: current_id,
+            friend_id: friend_id
+        });
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        const options = new RequestOptions({headers: headers});
+        console.log(body);
+        return this.http.post(environment.FRIENDS_ADD_URL, body, options)
+            .map((response: Response) => response.status === 200)
+            .catch(this.handleError);
+        // response.status === 201);
+    }
 }

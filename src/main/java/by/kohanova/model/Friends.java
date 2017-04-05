@@ -20,10 +20,6 @@ public class Friends implements Serializable {
     @JoinColumn(name = "friend2_id")
     public User user2;
 
-//    Friend in frontend :
-//    user1 - current user from local storage
-//    user2 - get by username from backend
-
     @Column
     public boolean status;
 
