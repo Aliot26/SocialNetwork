@@ -29,19 +29,16 @@ export class AppComponent implements OnInit {
     }
 
     isCurrentLang(lang: string) {
-        // check if the selected lang is current lang
         return lang === this._translate.currentLang;
     }
 
     selectLang(lang: string) {
-        // set current lang;
         this._translate.use(lang);
         this.refreshText();
     }
 
     refreshText() {
-        // refresh translation when language change
-        this.translatedText = this._translate.instant('hello world');
+        this.translatedText = this._translate.instant('hello');
     }
 
     logout(): void {

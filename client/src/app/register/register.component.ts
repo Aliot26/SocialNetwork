@@ -33,10 +33,9 @@ export class RegisterComponent {
             surname:this.userForm.value.surname}))
             .subscribe(result => {
                 if (result === true) {
-                    alert("Success!");
                     this.router.navigate(['/user']);
                 } else {
-                    alert("This username already exists!");
+                    this.router.navigate(['/register']);
                 }
             });
     }

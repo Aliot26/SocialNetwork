@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 result => {
                     if (result === true) {
-                        alert("Login success!");
                         this.roles = LoginService.getCurrentUser().roles;
                         if (this.roles.find(role => role.type === this.role_admin)) {
                             this.router.navigate(['/admin']);
@@ -40,7 +39,6 @@ export class LoginComponent implements OnInit {
                             this.router.navigate(['/user']);
                         }
                     } else {
-                        alert("Login Failed!");
                         this.error = 'Authentification error';
                         this.router.navigate(['/login']);
                     }

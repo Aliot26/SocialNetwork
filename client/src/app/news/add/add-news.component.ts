@@ -33,10 +33,9 @@ export class AddNewsComponent{
             content:this.newsForm.value.content, author:this.currentUser}))
             .subscribe(result => {
                 if (result === true) {
-                    alert("Success!");
                     this.router.navigate(['/user/news']);
                 } else {
-                    alert("It is impossible to create the news");
+                    this.router.navigate(['/user']);
                 }
             });
     }

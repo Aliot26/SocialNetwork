@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
     templateUrl: './update-profile.component.html'
 })
 export class UpdateProfileComponent implements OnInit {
-    loading: boolean = false;
+
     profileUser: User;
     currentUser: User;
     profileForm: FormGroup;
@@ -33,18 +33,15 @@ export class UpdateProfileComponent implements OnInit {
     }
 
     onSubmit() {
-        this.loading = true;
         this.profileUser.firstname = this.profileForm.value.firstname;
         this.profileUser.surname = this.profileForm.value.surname;
         this.profileUser.photo = this.profileForm.value.photo;
         this.userService.update(this.profileUser)
             .subscribe(result => {
                 if (result === true) {
-                    alert("Success!");
                     this.router.navigate(['/user']);
                 } else {
-                    alert("FOOOO!");
-                    this.loading = false;
+                    this.router.navigate(['/user/update-profile']);
                 }
             });
     }

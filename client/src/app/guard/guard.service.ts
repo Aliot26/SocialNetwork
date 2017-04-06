@@ -19,7 +19,6 @@ export class GuardService implements CanActivate {
         if (roles.length > 0 && user) {
             return GuardService.checkRoles(roles, user.roles);
         }
-        alert('You don\'t have permissions!');
         this.router.navigate(['/login']);
         return false;
     }
