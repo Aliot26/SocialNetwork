@@ -107,6 +107,9 @@ public class UserController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         try {
+            Role role = new Role();
+            role.id = 2;
+            user.roles.add(role);
             return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

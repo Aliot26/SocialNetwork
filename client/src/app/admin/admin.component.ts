@@ -48,9 +48,7 @@ export class AdminComponent implements OnInit {
         this.profileUser.surname = this.profileForm.value.surname;
         this.profileUser.photo = this.profileForm.value.photo;
         this.userService.update(this.profileUser)
-            .subscribe(
-                    () => this.loadAll()
-            );
+            .subscribe();
     }
 
     onDelete(id: number): void {
