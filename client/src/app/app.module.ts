@@ -16,6 +16,9 @@ import {GuardService} from "./guard/guard.service";
 import {UserModule} from "./user/user.module";
 import {AdminComponent} from "./admin/admin.component";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
+import {TranslateService} from "./translate/translate.service";
+import {TRANSLATION_PROVIDERS} from "./translate/translations";
+import {TranslatePipe} from "./translate/translate.pipe";
 
 @NgModule({
     imports: [
@@ -34,12 +37,15 @@ import {LocationStrategy, HashLocationStrategy} from "@angular/common";
         RegisterComponent,
         AdminComponent,
         DetailsComponent,
+        TranslatePipe,
         NotFoundComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         LoginService,
         GuardService,
+        TRANSLATION_PROVIDERS,
+        TranslateService,
         DetailsService
     ],
     bootstrap: [AppComponent]
