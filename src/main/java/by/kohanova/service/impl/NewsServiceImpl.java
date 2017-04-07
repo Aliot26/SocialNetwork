@@ -41,5 +41,10 @@ public class NewsServiceImpl implements NewsService {
     public News create(News news) {
         return newsRepository.save(news);
     }
+
+    @Override
+    public void delete(Integer id) {
+        newsRepository.delete(id);
+    }
 }
 

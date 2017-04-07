@@ -30,4 +30,9 @@ public interface FriendsService {
     List<Friends> findById(Integer id);
 
     List<Friends> findByFriendId(Integer id);
+
+    Friends findFriendByFriendId(Integer id1, Integer id2);
+
+    Friends update(Friends friends);
+
 }

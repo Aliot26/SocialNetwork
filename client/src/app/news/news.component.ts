@@ -25,4 +25,10 @@ export class NewsComponent  implements OnInit  {
         this.newsService.getNewsByAuthor(this.currentUser.id)
             .subscribe(newsList => this.newsList = newsList);
     }
+
+    onDelete(id: number): void {
+        this.newsService.remove(id)
+            .subscribe(result => result ? this.loadData() : alert("Error!"),
+                error => alert(error));
+    }
 }

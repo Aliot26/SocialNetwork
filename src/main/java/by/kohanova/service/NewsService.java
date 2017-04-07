@@ -40,5 +40,12 @@ public interface NewsService {
      * @param news
      */
     News create(News news);
+
+    /**
+     * Delete {@link News} by id from database
+     *
+     * @param id
+     */
+    void delete(Integer id);
 }
 

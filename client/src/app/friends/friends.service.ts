@@ -15,11 +15,6 @@ export class FriendsService {
             .catch(this.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
-    }
-
     create(current_id: number, friend_id: number): Observable<any> {
         const body = JSON.stringify({
             current_id: current_id,
@@ -34,4 +29,24 @@ export class FriendsService {
             .map((response: Response) => response.status === 201)
             .catch(this.handleError);
     }
+
+    update(current_id: number, friend_id: number) {
+        const body = JSON.stringify({
+            current_id: current_id,
+            friend_id: friend_id
+        });
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        const options = new RequestOptions({headers: headers});
+        return this.http.put(environment.FRIENDS_CONFIRM_URL, body, options)
+            .map((response: Response) => response.status === 200)
+            .catch(this.handleError);
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
+    }
+
 }

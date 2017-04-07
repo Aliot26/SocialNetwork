@@ -77,4 +77,20 @@ public class NewsController {
             System.out.println("Error in updating user's news");
         }
     }
+
+    /**
+     * Delete {@link News} by id from database
+     *
+     * @param id
+     * @return http response with http status code
+     */
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteNews(@PathVariable("id") Integer id) {
+        try {
+            newsService.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NullPointerException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

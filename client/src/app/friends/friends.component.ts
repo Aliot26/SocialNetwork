@@ -25,6 +25,5 @@ export class FriendsComponent  implements OnInit  {
         console.log(this.currentUser.id);
         this.friendsService.getFriendsById(this.currentUser.id)
             .subscribe(friendsList => this.friendsList = friendsList);
-        console.log(this.friendsList);
     }
 }

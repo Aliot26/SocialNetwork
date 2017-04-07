@@ -34,4 +34,14 @@ export class NewsService {
             .catch(this.handleError);
         // response.status === 201);
     }
+
+    remove(id: number): Observable<any> {
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        const options = new RequestOptions({headers: headers});
+        return this.http.delete(environment.NEWS_DELETE_URL + "/" + id, options)
+            .map((response) => response.status === 200)
+            .catch(this.handleError);
+    }
 }

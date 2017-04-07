@@ -2,6 +2,7 @@ package by.kohanova.controller;
 
 import by.kohanova.model.Friends;
 import by.kohanova.model.FriendsIds;
+import by.kohanova.model.Role;
 import by.kohanova.model.User;
 import by.kohanova.service.FriendsService;
 import by.kohanova.service.UserService;
@@ -53,6 +54,19 @@ public class FriendsController {
         }
     }
 
+    @RequestMapping(value = "/confirm", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateFriends(@RequestBody FriendsIds friendsIds) {
+        try {
+            Integer id1 = friendsIds.current_id;
+            Integer id2 = friendsIds.friend_id;
+            Friends friends = friendsService.findFriendByFriendId(id1, id2);
+            friends.status = true;
+            return new ResponseEntity<>(friendsService.update(friends), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     /**
      * Return list of all friends from database
      *
@@ -85,6 +99,7 @@ public class FriendsController {
     @RequestMapping(value = "/all/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> loadFriendsById(@PathVariable("id") Integer id) {
         try {
+
             return new ResponseEntity<>(friendsService.findById(id), HttpStatus.OK);
         } catch (NullPointerException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

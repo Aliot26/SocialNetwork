@@ -29,12 +29,6 @@ export class SearchFriendsComponent  implements OnInit  {
     onSubmit(id: number){
         this.currentUser = LoginService.getCurrentUser();
         this.friendsService.create(this.currentUser.id, id)
-            .subscribe(result => {
-                if (result === true) {
-                    alert("Success!");
-                } else {
-                    alert("It is impossible to create the news");
-                }
-            });
+            .subscribe();
     }
 }

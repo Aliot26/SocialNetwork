@@ -36,4 +36,14 @@ public class FriendsServiceImpl implements FriendsService {
     public List<Friends> findByFriendId(Integer id) {
         return friendsRepository.findByFriendId(id);
     }
+
+    @Override
+    public Friends findFriendByFriendId(Integer id1, Integer id2) {
+        return friendsRepository.findFriendByFriendId(id1, id2);
+    }
+
+    @Override
+    public Friends update(Friends friends) {
+        return friendsRepository.save(friends);
+    }
 }
