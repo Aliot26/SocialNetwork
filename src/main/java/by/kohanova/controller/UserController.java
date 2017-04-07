@@ -33,12 +33,6 @@ public class UserController {
         this.friendsService = friendsService;
     }
 
-    @RequestMapping("/hello")
-    public String hello() {
-        String hello = "Hello Spring! It was written by Olga";
-        return hello;
-    }
-
     /**
      * Create {@link User} in datebase from registration form
      *
@@ -78,18 +72,21 @@ public class UserController {
     @RequestMapping(value = "/friends/{id}", method = RequestMethod.GET)
     public List<User> loadAllFriends(@PathVariable Integer id) {
         try {
-            List<Friends> friendsList = friendsService.findById(id);
+            List<Friends> friendsListByCurrentUser = friendsService.findById(id);
+            List<Friends> friendsListByRequestedUser = friendsService.findByFriendId(id);
             List<User> allUsers = userService.findAll();
+
+            for (Friends friends : friendsListByCurrentUser) {
+                allUsers.remove(friends.user2);
+            }
+            for (Friends friends : friendsListByRequestedUser) {
+                allUsers.remove(friends.user1);
+            }
 
             for (Iterator<User> iter = allUsers.listIterator(); iter.hasNext(); ) {
                 User user = iter.next();
                 if (user.id == id || user.roles.get(0).id != 2) {
                     iter.remove();
-                }
-                for (Friends friends : friendsList) {
-                    if (user.id == friends.user2.id) {
-                        iter.remove();
-                    }
                 }
             }
             return allUsers;
@@ -125,9 +122,6 @@ public class UserController {
     @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
     public ResponseEntity<?> loadUserByUsername(@PathVariable String username) {
         try {
-            User user = userService.findByUsername(username);
-            System.out.println(user.firstname);
-
             return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
         } catch (NullPointerException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -152,6 +146,7 @@ public class UserController {
 
     /**
      * Add {@link User} object to database with base user role
+     *
      * @param user
      */
     private String addUser(User user) {

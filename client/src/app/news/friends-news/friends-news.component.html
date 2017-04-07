@@ -1,10 +1,5 @@
-<h1>NEWS</h1>
-<router-outlet>
+<h4>NEWS oF MY FRIENDS</h4>
 
-</router-outlet>
-<div>
-    <button class="btn btn-info" routerLink="add-news" routerLinkActive="active">Add news</button>
-</div>
 <div>
     <div class="panel-group" *ngIf="newsList">
         <div class="panel panel-default" *ngFor="let news of newsList">
@@ -12,7 +7,6 @@
             <div class="panel-heading">{{news.date}}</div>
             <div class="panel-heading">{{news.user.firstname}}</div>
             <div class="panel-body">{{news.content}}</div>
-            <button class="btn btn-danger" (click)="onDelete(news.id)">Delete</button>
         </div>
     </div>
 </div>

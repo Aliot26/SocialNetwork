@@ -2,7 +2,6 @@ package by.kohanova.controller;
 
 import by.kohanova.model.Friends;
 import by.kohanova.model.FriendsIds;
-import by.kohanova.model.Role;
 import by.kohanova.model.User;
 import by.kohanova.service.FriendsService;
 import by.kohanova.service.UserService;
@@ -11,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -48,7 +48,14 @@ public class FriendsController {
     @RequestMapping(value = "/requested/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> loadRequestedFriendsById(@PathVariable("id") Integer id) {
         try {
-            return new ResponseEntity<>(friendsService.findByFriendId(id), HttpStatus.OK);
+            List<Friends> requestedFriends = friendsService.findByFriendId(id);
+            for (Iterator<Friends> iter = requestedFriends.listIterator(); iter.hasNext(); ) {
+                Friends friends = iter.next();
+                if (friends.status) {
+                    iter.remove();
+                }
+            }
+            return new ResponseEntity<>(requestedFriends, HttpStatus.OK);
         } catch (NullPointerException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -75,15 +82,6 @@ public class FriendsController {
     @RequestMapping("/all")
     public List<Friends> loadAllFriends() {
         try {
-//            User user1 = userService.findByUsername("Olga");
-//            User user2 = userService.findByUsername("Anna");
-//
-//            Friends friends = new Friends();
-//            friends.user1 = user1;
-//            friends.user2 = user2;
-//            friends.status = false;
-//
-//            friendsService.create(friends);
             return friendsService.findAll();
         } catch (NullPointerException e) {
             return null;
@@ -99,8 +97,34 @@ public class FriendsController {
     @RequestMapping(value = "/all/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> loadFriendsById(@PathVariable("id") Integer id) {
         try {
+            List<Friends> confirmedFriends = friendsService.findById(id);
+            for (Iterator<Friends> iter = confirmedFriends.listIterator(); iter.hasNext(); ) {
+                Friends friends = iter.next();
+                if (!friends.status) {
+                    iter.remove();
+                }
+            }
+            List<Friends> friendss = friendsService.findByFriendId(id);
+            for (Iterator<Friends> iter = friendss.listIterator(); iter.hasNext(); ) {
+                Friends friends = iter.next();
+                if (!friends.status) {
+                    iter.remove();
+                }
+            }
 
-            return new ResponseEntity<>(friendsService.findById(id), HttpStatus.OK);
+            for (Friends friends : friendss) {
+                confirmedFriends.add(friends);
+            }
+
+            User tempUser;
+            for (Friends friends : confirmedFriends) {
+                if (friends.user2.id == id) {
+                    tempUser = friends.user1;
+                    friends.user1 = friends.user2;
+                    friends.user2 = tempUser;
+                }
+            }
+            return new ResponseEntity<>(confirmedFriends, HttpStatus.OK);
         } catch (NullPointerException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

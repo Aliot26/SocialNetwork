@@ -1,14 +1,18 @@
 package by.kohanova.controller;
 
+import by.kohanova.model.Friends;
 import by.kohanova.model.News;
 import by.kohanova.model.User;
+import by.kohanova.service.FriendsService;
 import by.kohanova.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,10 +22,12 @@ import java.util.List;
 @RequestMapping("/news")
 public class NewsController {
     private final NewsService newsService;
+    private final FriendsService friendsService;
 
     @Autowired
-    public NewsController(NewsService newsService) {
+    public NewsController(NewsService newsService, FriendsService friendsService) {
         this.newsService = newsService;
+        this.friendsService = friendsService;
     }
 
     /**
@@ -89,6 +95,25 @@ public class NewsController {
         try {
             newsService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NullPointerException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/friends/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> loadNewsByFriends(@PathVariable("id") Integer id) {
+        try {
+            List<Friends> friendsList = friendsService.findById(id);
+            List<News> newsList = new ArrayList<>();
+            for (Friends friends : friendsList) {
+                if (friends.status) {
+                    List<News> friendNewsList = newsService.findById(friends.user2.id);
+                    for (News news : friendNewsList) {
+                        newsList.add(news);
+                    }
+                }
+            }
+            return new ResponseEntity<>(newsList, HttpStatus.OK);
         } catch (NullPointerException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

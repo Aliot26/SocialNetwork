@@ -15,6 +15,7 @@ import {FriendsComponent} from "../friends/friends.component";
 import {FriendsService} from "../friends/friends.service";
 import {SearchFriendsComponent} from "../friends/search/search-friends.component";
 import {RequestComponent} from "../friends/request/request.component";
+import {FriendsNewsComponent} from "../news/friends-news/friends-news.component";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {RequestComponent} from "../friends/request/request.component";
         UserComponent,
         NewsComponent,
         FriendsComponent,
+        FriendsNewsComponent,
         SearchFriendsComponent,
         RequestComponent,
         AddNewsComponent,

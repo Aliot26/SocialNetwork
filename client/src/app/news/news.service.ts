@@ -32,7 +32,6 @@ export class NewsService {
         return this.http.post(environment.NEWS_ADD_URL, body, options)
             .map((response: Response) => response.status === 201)
             .catch(this.handleError);
-        // response.status === 201);
     }
 
     remove(id: number): Observable<any> {
@@ -42,6 +41,12 @@ export class NewsService {
         const options = new RequestOptions({headers: headers});
         return this.http.delete(environment.NEWS_DELETE_URL + "/" + id, options)
             .map((response) => response.status === 200)
+            .catch(this.handleError);
+    }
+
+    getNewsByFriends(id: number) {
+        return this.http.get(environment.FRIENDS_NEWS_URL + "/" + id)
+            .map(response => response.json())
             .catch(this.handleError);
     }
 }
