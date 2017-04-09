@@ -13,12 +13,12 @@ public class Friends implements Serializable {
     public Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "friend1_id")
-    public User user1;
+    @JoinColumn(name = "user_alfa")
+    public User userAlfa;
 
     @ManyToOne
-    @JoinColumn(name = "friend2_id")
-    public User user2;
+    @JoinColumn(name = "user_beta")
+    public User userBeta;
 
     @Column
     public boolean status;
@@ -30,7 +30,7 @@ public class Friends implements Serializable {
         if (!(obj instanceof Friends))
             return false;
         Friends other = (Friends) obj;
-        return id == null ? false : id.equals(other.id);
+        return id != null && id.equals(other.id);
     }
 
     @Override

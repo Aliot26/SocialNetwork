@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Controller for the {@link FriendsService}
+ */
 @RestController
 @RequestMapping("/friends")
 public class FriendsController {
-
     private final FriendsService friendsService;
     private final UserService userService;
 
@@ -26,6 +29,10 @@ public class FriendsController {
         this.userService = userService;
     }
 
+    /**
+     * Create {@link Friends} in database
+     * @return http response with http status code
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> createFriends(@RequestBody FriendsIds friendsIds) {
         try {
@@ -34,8 +41,8 @@ public class FriendsController {
             User currentUser = userService.findById(currentId);
             User friendUser = userService.findById(friendId);
             Friends friends = new Friends();
-            friends.user1 = currentUser;
-            friends.user2 = friendUser;
+            friends.userAlfa = currentUser;
+            friends.userBeta = friendUser;
             friends.status = false;
             friendsService.create(friends);
 
@@ -45,6 +52,10 @@ public class FriendsController {
         }
     }
 
+    /**
+     * Load requested friends by current user id
+     * @return http response with http status code
+     */
     @RequestMapping(value = "/requested/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> loadRequestedFriendsById(@PathVariable("id") Integer id) {
         try {
@@ -61,6 +72,10 @@ public class FriendsController {
         }
     }
 
+    /**
+     * Confirmation adding user to friends list
+     * @return http response with http status code
+     */
     @RequestMapping(value = "/confirm", method = RequestMethod.PUT)
     public ResponseEntity<?> updateFriends(@RequestBody FriendsIds friendsIds) {
         try {
@@ -76,8 +91,6 @@ public class FriendsController {
 
     /**
      * Return list of all friends from database
-     *
-     * @return list of friends
      */
     @RequestMapping("/all")
     public List<Friends> loadAllFriends() {
@@ -89,10 +102,7 @@ public class FriendsController {
     }
 
     /**
-     * Find {@link Friends} by User id
-     *
-     * @param id {@link User}
-     * @return list of friends
+     * Find list of confirmed {@link Friends} by current user id
      */
     @RequestMapping(value = "/all/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> loadFriendsById(@PathVariable("id") Integer id) {
@@ -118,10 +128,10 @@ public class FriendsController {
 
             User tempUser;
             for (Friends friends : confirmedFriends) {
-                if (friends.user2.id == id) {
-                    tempUser = friends.user1;
-                    friends.user1 = friends.user2;
-                    friends.user2 = tempUser;
+                if (Objects.equals(friends.userBeta.id, id)) {
+                    tempUser = friends.userAlfa;
+                    friends.userAlfa = friends.userBeta;
+                    friends.userBeta = tempUser;
                 }
             }
             return new ResponseEntity<>(confirmedFriends, HttpStatus.OK);

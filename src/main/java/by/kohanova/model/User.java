@@ -32,7 +32,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<News> news;
 
-    @OneToMany(mappedBy = "user1")
+    @OneToMany(mappedBy = "userAlfa")
     private List<Friends> friends;
 
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
@@ -50,7 +50,7 @@ public class User implements Serializable {
         if (!(obj instanceof User))
             return false;
         User other = (User) obj;
-        return id == null ? false : id.equals(other.id);
+        return id != null && id.equals(other.id);
     }
 
     @Override

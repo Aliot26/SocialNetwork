@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * User Controller for {@link UserService}
@@ -34,9 +35,7 @@ public class UserController {
     }
 
     /**
-     * Create {@link User} in datebase from registration form
-     *
-     * @param user model
+     * Create {@link User} in database from registration form
      * @return http response with http status code
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -52,8 +51,6 @@ public class UserController {
 
     /**
      * Return list of all users from database
-     *
-     * @return list of users
      */
     @RequestMapping("/all")
     public List<User> loadAllUsers() {
@@ -65,27 +62,25 @@ public class UserController {
     }
 
     /**
-     * Return list of users excluding admin, current user and friends
-     *
-     * @return list of users
+     * Return list of users excluding admin, current user and confirmed friends
      */
     @RequestMapping(value = "/friends/{id}", method = RequestMethod.GET)
-    public List<User> loadAllFriends(@PathVariable Integer id) {
+    public List<User> loadPossibleFriends(@PathVariable Integer id) {
         try {
             List<Friends> friendsListByCurrentUser = friendsService.findById(id);
             List<Friends> friendsListByRequestedUser = friendsService.findByFriendId(id);
             List<User> allUsers = userService.findAll();
 
             for (Friends friends : friendsListByCurrentUser) {
-                allUsers.remove(friends.user2);
+                allUsers.remove(friends.userBeta);
             }
             for (Friends friends : friendsListByRequestedUser) {
-                allUsers.remove(friends.user1);
+                allUsers.remove(friends.userAlfa);
             }
 
             for (Iterator<User> iter = allUsers.listIterator(); iter.hasNext(); ) {
                 User user = iter.next();
-                if (user.id == id || user.roles.get(0).id != 2) {
+                if (Objects.equals(user.id, id) || user.roles.get(0).id != 2) {
                     iter.remove();
                 }
             }
@@ -96,9 +91,7 @@ public class UserController {
     }
 
     /**
-     * Update {@link User} in database
-     *
-     * @param user model
+     * Update {@link User} info in database
      * @return http response with http status code
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
@@ -115,9 +108,6 @@ public class UserController {
 
     /**
      * Find {@link User} by username in database
-     *
-     * @param username
-     * @return {@link User} entity
      */
     @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
     public ResponseEntity<?> loadUserByUsername(@PathVariable String username) {
@@ -130,8 +120,6 @@ public class UserController {
 
     /**
      * Delete {@link User} by id from database
-     *
-     * @param id
      * @return http response with http status code
      */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
@@ -146,8 +134,6 @@ public class UserController {
 
     /**
      * Add {@link User} object to database with base user role
-     *
-     * @param user
      */
     private String addUser(User user) {
         user.photo = "";

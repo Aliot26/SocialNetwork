@@ -11,11 +11,11 @@
         </thead>
         <tbody>
         <tr *ngFor="let friends of requestList">
-            <td>{{friends.user1.username}}</td>
-            <td>{{friends.user1.firstname}}</td>
-            <td>{{friends.user1.photo}}</td>
+            <td>{{friends.userAlfa.username}}</td>
+            <td>{{friends.userAlfa.firstname}}</td>
+            <td>{{friends.userAlfa.photo}}</td>
             <td>
-                <button class="btn btn-info" (click)="onSubmit(friends.user1.id)">Add</button>
+                <button class="btn btn-info" (click)="onSubmit(friends.userAlfa.id)">Add</button>
             </td>
         </tr>
         </tbody>

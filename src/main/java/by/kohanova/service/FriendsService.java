@@ -9,30 +9,31 @@ public interface FriendsService {
 
     /**
      * Find all {@link Friends} from database
-     *
-     * @return list of {@link Friends}
      */
     List<Friends> findAll();
 
     /**
      * Create and save {@link Friends} in database
-     *
-     * @param friends
      */
     Friends create(Friends friends);
 
     /**
-     * Find list of {@link Friends} by {@link User} id in database
-     *
-     * @param id
-     * @return list {@link Friends}
+     * Find list of {@link Friends} by current {@link User} id
      */
     List<Friends> findById(Integer id);
 
+    /**
+     * Find list of {@link Friends} by friend id in database
+     */
     List<Friends> findByFriendId(Integer id);
 
+    /**
+     * Find {@link Friends} by current {@link User} id and friend id
+     */
     Friends findFriendByFriendId(Integer id1, Integer id2);
 
+    /**
+     * Update {@link Friends} in database
+     */
     Friends update(Friends friends);
-
 }

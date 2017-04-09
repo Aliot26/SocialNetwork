@@ -1,7 +1,6 @@
 package by.kohanova.service.impl;
 
 import by.kohanova.model.News;
-import by.kohanova.model.User;
 import by.kohanova.repository.NewsRepository;
 import by.kohanova.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;

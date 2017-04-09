@@ -13,10 +13,8 @@ import java.util.List;
 public interface NewsRepository extends JpaRepository<News, Integer> {
 
     /**
-     * Find {@link News} by user id from database
-     * @param id
-     * @return list of {@link News}
+     * Find list of {@link News} by current user id
      */
     @Query("select n from News n where n.user.id = :id")
-    List<News> findById(@Param("id") Integer id);
+    List<News> findById(@Param("id") int id);
 }

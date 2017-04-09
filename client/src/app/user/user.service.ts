@@ -32,7 +32,7 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    getUserByUsername(username: string) {
+    getUserByUsername(username: string): Observable<any>  {
         return this.http.get(environment.USER_URL + username)
             .map(response => response.json())
             .catch(this.handleError);

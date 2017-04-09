@@ -31,8 +31,6 @@ public class AuthController {
 
     /**
      * Find {@link User} by username and password in database and generate token by {@link TokenService}
-     *
-     * @param requestUser
      * @return {@link Token} and http response with http status code
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
