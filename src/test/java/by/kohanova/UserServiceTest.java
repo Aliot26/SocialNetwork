@@ -39,7 +39,7 @@ public class UserServiceTest {
     @Test
     public void testFindByUsername() {
         User user = userService.findByUsername("Olga");
-        assertEquals("Olg", user.firstname);
-        assertEquals("Olg", user.surname);
+        assertEquals("Olga", user.firstname);
+        assertEquals("Olga", user.surname);
     }
 }

@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {environment} from "../constants/environment";
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {News} from "../model/news";
-import {Observable} from "rxjs";
 
 @Injectable()
 export class NewsService {
@@ -16,12 +15,9 @@ export class NewsService {
             .catch(this.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
-    }
 
-    create(news: News): Observable<any> {
+
+    create(news: News) {
         const body = JSON.stringify({
             title: news.title, content: news.content, user: news.author
         });
@@ -34,7 +30,7 @@ export class NewsService {
             .catch(this.handleError);
     }
 
-    remove(id: number): Observable<any> {
+    remove(id: number){
         const headers = new Headers({
             'Content-Type': 'application/json'
         });
@@ -48,5 +44,10 @@ export class NewsService {
         return this.http.get(environment.FRIENDS_NEWS_URL + "/" + id)
             .map(response => response.json())
             .catch(this.handleError);
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
     }
 }

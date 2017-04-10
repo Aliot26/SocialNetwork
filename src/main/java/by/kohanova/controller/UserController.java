@@ -36,6 +36,7 @@ public class UserController {
 
     /**
      * Create {@link User} in database from registration form
+     *
      * @return http response with http status code
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -80,7 +81,7 @@ public class UserController {
 
             for (Iterator<User> iter = allUsers.listIterator(); iter.hasNext(); ) {
                 User user = iter.next();
-                if (Objects.equals(user.id, id) || user.roles.get(0).id != 2) {
+                if (Objects.equals(user.id, id) ||user.roles.get(0).id != 2){
                     iter.remove();
                 }
             }
@@ -92,6 +93,7 @@ public class UserController {
 
     /**
      * Update {@link User} info in database
+     *
      * @return http response with http status code
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
@@ -120,6 +122,7 @@ public class UserController {
 
     /**
      * Delete {@link User} by id from database
+     *
      * @return http response with http status code
      */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)

@@ -3,7 +3,6 @@ import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {User} from "../model/user";
 import {environment} from "../constants/environment";
-import {Observable} from "rxjs";
 import {LoginService} from "../authorization/login.service";
 
 @Injectable()
@@ -32,13 +31,13 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    getUserByUsername(username: string): Observable<any>  {
+    getUserByUsername(username: string) {
         return this.http.get(environment.USER_URL + username)
             .map(response => response.json())
             .catch(this.handleError);
     }
 
-    create(user: User): Observable<any> {
+    create(user: User) {
         const body = JSON.stringify({
             username: user.username, password: user.password, firstname: user.firstname,
             surname: user.surname
@@ -60,7 +59,6 @@ export class UserService {
         return false;
     })
             .catch(LoginService.handleError);
-           // response.status === 201);
     }
 
     update(user: User) {
@@ -77,7 +75,7 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    remove(id: number): Observable<any> {
+    remove(id: number){
         const headers = new Headers({
             'Content-Type': 'application/json'
         });
@@ -86,7 +84,6 @@ export class UserService {
             .map((response) => response.status === 200)
             .catch(this.handleError);
     }
-
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);
