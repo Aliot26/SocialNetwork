@@ -17,4 +17,10 @@ export const LANG_RU_TRANS = {
     'Login': 'Войти',
     'Reset': 'Очистить',
     'Cancel': 'Отмена',
+    'About': 'Мой профиль',
+    'News': 'Мои новости',
+    'Friends': 'Друзья',
+    'Search friends': 'Поиск друзей',
+    'Friend request': 'Запросы в друзья',
+    'Friends news': 'Новости друзей'
 };

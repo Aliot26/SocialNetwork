@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
- <testsuite name="Test login page" timestamp="2017-04-09T17:32:41" hostname="localhost" time="4.313" errors="0" tests="2" skipped="0" disabled="0" failures="0">
-  <testcase classname="Test login page" name="should go to the Adminpage" time="2.858" />
-  <testcase classname="Test login page" name="should go to the Userpage" time="1.453" />
+ <testsuite name="Test login page" timestamp="2017-04-10T08:46:35" hostname="localhost" time="5.561" errors="0" tests="2" skipped="0" disabled="0" failures="0">
+  <testcase classname="Test login page" name="should go to the Adminpage" time="3.608" />
+  <testcase classname="Test login page" name="should go to the Userpage" time="1.952" />
  </testsuite>
 </testsuites>

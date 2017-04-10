@@ -17,4 +17,10 @@ export const LANG_EN_TRANS = {
     'Login': 'Login',
     'Reset': 'Reset',
     'Cancel': 'Cancel',
+    'About': 'About',
+    'News': 'News',
+    'Friends': 'Friends',
+    'Search friends': 'Search friends',
+    'Friend request': 'Friend request',
+    'Friends news': 'Friends news'
 };
