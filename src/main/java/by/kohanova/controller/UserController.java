@@ -7,6 +7,7 @@ import by.kohanova.model.User;
 import by.kohanova.security.TokenService;
 import by.kohanova.service.FriendsService;
 import by.kohanova.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,8 @@ public class UserController {
     private final TokenService tokenService;
     private final FriendsService friendsService;
 
+    final static Logger LOGGER = Logger.getLogger(UserController.class);
+
     @Autowired
     public UserController(UserService userService, FriendsService friendsService,
                           TokenService tokenService) {
@@ -42,10 +45,12 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody User user) {
         try {
+            LOGGER.info("Start createUser method");
             String token = addUser(user);
             user.password = "";
             return new ResponseEntity<>(new Token(token, user), HttpStatus.OK);
         } catch (Exception e) {
+            LOGGER.error("Failed createUser method with " + HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -56,8 +61,10 @@ public class UserController {
     @RequestMapping("/all")
     public List<User> loadAllUsers() {
         try {
+            LOGGER.info("Start loadAllUsers method");
             return userService.findAll();
         } catch (NullPointerException e) {
+            LOGGER.error("Failed loadAllUsers method with NPE");
             return null;
         }
     }
@@ -68,6 +75,7 @@ public class UserController {
     @RequestMapping(value = "/friends/{id}", method = RequestMethod.GET)
     public List<User> loadPossibleFriends(@PathVariable Integer id) {
         try {
+            LOGGER.info("Start loadPossibleFriends method");
             List<Friends> friendsListByCurrentUser = friendsService.findById(id);
             List<Friends> friendsListByRequestedUser = friendsService.findByFriendId(id);
             List<User> allUsers = userService.findAll();
@@ -87,6 +95,7 @@ public class UserController {
             }
             return allUsers;
         } catch (NullPointerException e) {
+            LOGGER.error("Failed loadPossibleFriends method with NPE");
             return null;
         }
     }
@@ -99,11 +108,13 @@ public class UserController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         try {
+            LOGGER.info("Start updateUser method");
             Role role = new Role();
             role.id = 2;
             user.roles.add(role);
             return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
         } catch (Exception e) {
+            LOGGER.error("Failed updateUser method with " + HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -114,8 +125,10 @@ public class UserController {
     @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
     public ResponseEntity<?> loadUserByUsername(@PathVariable String username) {
         try {
+            LOGGER.info("Start loadUserByUsername method");
             return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
         } catch (NullPointerException e) {
+            LOGGER.error("Failed loadUserByUsername method with " + HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -128,9 +141,11 @@ public class UserController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
         try {
+            LOGGER.info("Start deleteUser method");
             userService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NullPointerException e) {
+            LOGGER.error("Failed deleteUser method with " + HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

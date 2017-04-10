@@ -4,6 +4,7 @@ import by.kohanova.model.Token;
 import by.kohanova.model.User;
 import by.kohanova.security.TokenService;
 import by.kohanova.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class AuthController {
     private final TokenService tokenService;
     private final UserService userService;
 
+    final static Logger LOGGER = Logger.getLogger(AuthController.class);
+
     @Autowired
     public AuthController(TokenService tokenService, UserService userService) {
         this.tokenService = tokenService;
@@ -40,9 +43,11 @@ public class AuthController {
             String token = tokenService.generate(user, requestUser.password);
             if (token != null) {
                 user.password = "";
+                LOGGER.info("Autenticate method with token generating");
                 return new ResponseEntity<>(new Token(token, user), HttpStatus.OK);
             }
         }
+        LOGGER.error("Autenticate method failed with " + HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

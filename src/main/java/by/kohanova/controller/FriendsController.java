@@ -5,6 +5,7 @@ import by.kohanova.model.FriendsIds;
 import by.kohanova.model.User;
 import by.kohanova.service.FriendsService;
 import by.kohanova.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class FriendsController {
     private final FriendsService friendsService;
     private final UserService userService;
 
+    final static Logger LOGGER = Logger.getLogger(FriendsController.class);
+
     @Autowired
     public FriendsController(FriendsService friendsService, UserService userService) {
         this.friendsService = friendsService;
@@ -36,6 +39,7 @@ public class FriendsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> createFriends(@RequestBody FriendsIds friendsIds) {
         try {
+            LOGGER.info("Start createFriends method");
             Integer currentId = friendsIds.current_id;
             Integer friendId = friendsIds.friend_id;
             User currentUser = userService.findById(currentId);
@@ -48,6 +52,7 @@ public class FriendsController {
 
             return new ResponseEntity<>(new Friends(), HttpStatus.CREATED);
         } catch (Exception e) {
+            LOGGER.info("CreateFriends method failed " + HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -59,6 +64,7 @@ public class FriendsController {
     @RequestMapping(value = "/requested/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> loadRequestedFriendsById(@PathVariable("id") Integer id) {
         try {
+            LOGGER.info("Start loadRequestedFriendsById method");
             List<Friends> requestedFriends = friendsService.findByFriendId(id);
             for (Iterator<Friends> iter = requestedFriends.listIterator(); iter.hasNext(); ) {
                 Friends friends = iter.next();
@@ -68,6 +74,7 @@ public class FriendsController {
             }
             return new ResponseEntity<>(requestedFriends, HttpStatus.OK);
         } catch (NullPointerException e) {
+            LOGGER.error("LoadRequestedFriendsById method failed " + HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -79,12 +86,14 @@ public class FriendsController {
     @RequestMapping(value = "/confirm", method = RequestMethod.PUT)
     public ResponseEntity<?> updateFriends(@RequestBody FriendsIds friendsIds) {
         try {
+            LOGGER.info("Start updateFriends method");
             Integer id1 = friendsIds.current_id;
             Integer id2 = friendsIds.friend_id;
             Friends friends = friendsService.findFriendByFriendId(id1, id2);
             friends.status = true;
             return new ResponseEntity<>(friendsService.update(friends), HttpStatus.OK);
         } catch (Exception e) {
+            LOGGER.error("UpdateFriends method failed " + HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -95,8 +104,10 @@ public class FriendsController {
     @RequestMapping("/all")
     public List<Friends> loadAllFriends() {
         try {
+            LOGGER.info("Start loadAllFriends method");
             return friendsService.findAll();
         } catch (NullPointerException e) {
+            LOGGER.error("LoadAllFriends method failed " + HttpStatus.BAD_REQUEST);
             return null;
         }
     }
@@ -107,6 +118,7 @@ public class FriendsController {
     @RequestMapping(value = "/all/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> loadFriendsById(@PathVariable("id") Integer id) {
         try {
+            LOGGER.info("Start loadFriendsById method");
             List<Friends> confirmedFriends = friendsService.findById(id);
             for (Iterator<Friends> iter = confirmedFriends.listIterator(); iter.hasNext(); ) {
                 Friends friends = iter.next();
@@ -136,6 +148,7 @@ public class FriendsController {
             }
             return new ResponseEntity<>(confirmedFriends, HttpStatus.OK);
         } catch (NullPointerException e) {
+            LOGGER.error("loadFriendsById method failed " + HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

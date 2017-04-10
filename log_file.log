@@ -1,0 +1,28 @@
+2017-04-10 21:12:50 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-10 21:12:50 INFO  Version:45 - HHH000412: Hibernate Core {5.2.6.Final}
+2017-04-10 21:12:50 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-04-10 21:12:50 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-10 21:12:50 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-04-10 21:12:50 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-04-10 21:12:50 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@c9e01f6
+2017-04-10 21:12:51 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-04-10 21:13:19 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-10 21:13:19 INFO  Version:45 - HHH000412: Hibernate Core {5.2.6.Final}
+2017-04-10 21:13:19 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-04-10 21:13:19 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-10 21:13:20 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-04-10 21:13:20 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-04-10 21:13:20 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@7349f38f
+2017-04-10 21:13:21 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-04-10 21:13:36 INFO  AuthController:46 - Autenticate method with token generating
+2017-04-10 21:13:36 INFO  UserController:128 - Start loadUserByUsername method
+2017-04-10 21:13:38 INFO  UserController:128 - Start loadUserByUsername method
+2017-04-10 21:13:40 INFO  UserController:54 - Start loadNewsById method
+2017-04-10 21:13:42 INFO  FriendsController:121 - Start loadFriendsById method
+2017-04-10 21:13:43 INFO  UserController:78 - Start loadPossibleFriends method
+2017-04-10 21:13:44 INFO  FriendsController:67 - Start loadRequestedFriendsById method
+2017-04-10 21:13:46 INFO  UserController:100 - Start loadNewsByFriends method
