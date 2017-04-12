@@ -3,24 +3,24 @@ import { TRANSLATIONS } from './translations';
 
 @Injectable()
 export class TranslateService {
-    private _currentLang: string;
+    private curentLang: string;
 
     public get currentLang() {
-        return this._currentLang;
+        return this.curentLang;
     }
 
-    constructor(@Inject(TRANSLATIONS) private _translations: any) {
+    constructor(@Inject(TRANSLATIONS) private translations: any) {
     }
 
     public use(lang: string): void {
-        this._currentLang = lang;
+        this.curentLang = lang;
     }
 
     private translate(key: string): string {
         let translation = key;
 
-        if (this._translations[this.currentLang] && this._translations[this.currentLang][key]) {
-            return this._translations[this.currentLang][key];
+        if (this.translations[this.currentLang] && this.translations[this.currentLang][key]) {
+            return this.translations[this.currentLang][key];
         }
 
         return translation;

@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {environment} from "../constants/environment";
-import {Observable} from "rxjs";
 
 @Injectable()
 export class FriendsService {
@@ -15,7 +14,7 @@ export class FriendsService {
             .catch(this.handleError);
     }
 
-    create(current_id: number, friend_id: number): Observable<any> {
+    create(current_id: number, friend_id: number) {
         const body = JSON.stringify({
             current_id: current_id,
             friend_id: friend_id
