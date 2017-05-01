@@ -13,9 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * User Controller for {@link UserService}
@@ -62,12 +60,17 @@ public class UserController {
     public List<User> loadAllUsers() {
         try {
             LOGGER.info("Start loadAllUsers method");
-            return userService.findAll();
+            List<User> sortList = userService.findAll();
+            Collections.sort(sortList, new User());
+
+            return sortList;
         } catch (NullPointerException e) {
             LOGGER.error("Failed loadAllUsers method with NPE");
             return null;
         }
     }
+
+
 
     /**
      * Return list of users excluding admin, current user and confirmed friends

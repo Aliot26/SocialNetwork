@@ -3,11 +3,12 @@ package by.kohanova.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User implements Serializable, Comparator<User> {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -42,6 +43,11 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     public List<Role> roles = new ArrayList<>();
+
+    @Override
+    public int compare(User o1, User o2) {
+        return o1.username.compareToIgnoreCase(o2.username);
+    }
 
     @Override
     public boolean equals(Object obj) {
